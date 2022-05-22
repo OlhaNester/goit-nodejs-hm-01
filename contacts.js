@@ -3,20 +3,20 @@ const contactsPath = require("./contactsPath");
 const { v4 } = require("uuid");
 const updateContacts = require("./updateContacts");
 
-const listContacts = async () => {
+async function listContacts() {
   const data = await fs.readFile(contactsPath);
   const contacts = JSON.parse(data);
   return contacts;
-};
+}
 
-const getContactById = async (contactId) => {
+async function getContactById(contactId) {
   const contacts = await listContacts();
   const contactById = contacts.find((item) => item.id === contactId);
   if (!contactById) {
     return null;
   }
   return contactById;
-};
+}
 
 async function removeContact(contactId) {
   const contacts = await listContacts();
